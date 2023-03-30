@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+
+		<ui:define name="content">
+
+			<div id="page_content">
+
+				<p:button value="Inserisci un nuovo pacchetto"
+					outcome="/admin/package/insertPackage" />
+
+				<br /> <br />
+
+				<h:form id="packageListForm">
+
+					<p:dataTable id="PackageList" var="package"
+						value="#{packageBean.getAllPackages()}">
+
+						<p:column headerText="Nome" style="width:15%">
+							<h:outputText value="#{package.name}" />
+						</p:column>
+
+						<p:column headerText="Descrizione" style="width:30%">
+							<h:outputText value="#{package.description}" />
+						</p:column>
+
+						<p:column headerText="Data Inizio" style="width:19%">
+							<h:outputText value="#{package.startDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+
+						<p:column headerText="Data Fine" style="width:19%">
+							<h:outputText value="#{package.endDate}">
+								<f:convertDateTime pattern="dd/MM/yyyy" />
+							</h:outputText>
+						</p:column>
+
+						<p:column style="width:17%">
+
+							<p:splitButton value="Dettagli" icon="ui-icon-disk" action="#{navigationBean.toPackageModify(package.id)}">
+
+								<p:menuitem value="Elimina" icon="ui-icon-close" action="#{packageBean.removeDefaultPackage(package.id)}"/>
+
+							</p:splitButton>
+						</p:column>
+						
+					</p:dataTable>
+				</h:form>
+
+			</div>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+
+
+</html>

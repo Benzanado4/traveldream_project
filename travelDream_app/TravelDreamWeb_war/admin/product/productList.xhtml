@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+
+		<ui:define name="content">
+			<div id="page_content">
+
+				<p:button value="Inserisci un nuovo prodotto"
+					outcome="/admin/product/insertProductFilter" />
+
+
+				<h4>Elenco Prodotti</h4>
+
+				<h:form id="form">
+
+
+					<p:dataTable id="ProductList" var="product"
+						value="#{productBean.getProducts()}">
+
+						<p:column headerText="Nome" style="width:15%">
+							<h:outputText value="#{product.name}" />
+						</p:column>
+
+						<p:column headerText="Descrizione" style="width:35%">
+							<h:outputText value="#{product.description}" />
+						</p:column>
+
+						<p:column headerText="Prezzo" style="width:10%">
+							<h:outputText value="#{product.price}" />
+							<h:outputText value=" €" />
+						</p:column>
+
+
+						<p:column headerText="Tipo" style="width:10%">
+							<h:outputText value="#{productBean.getProductTypeName(product)}" />
+						</p:column>
+
+						<p:column style="width:17%">
+
+							<p:splitButton value="Dettagli"
+								action="#{navigationBean.toProductDetail(product.productId)}"
+								icon="ui-icon-disk">
+
+								<p:menuitem value="Elimina"
+									action="#{productBean.removeProduct(product.productId)}"
+									icon="ui-icon-close" />
+
+							</p:splitButton>
+						</p:column>
+
+					</p:dataTable>
+				</h:form>
+
+				<!-- per far venire fuori il messaggio di corretto inserimento
+			<h:form id="form1">
+				<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" display="ciucciamanubri" rendered="param['confirm']== true]"/>
+			
+
+			</h:form> -->
+
+			
+				<br />
+			</div>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

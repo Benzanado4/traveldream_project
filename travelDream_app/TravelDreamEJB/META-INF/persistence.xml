@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="TravelDreamEJB">
+		<jta-data-source>jdbc/traveldream_connection</jta-data-source>
+		<class>it.polimi.traveldream.persistence.User</class>
+		<class>it.polimi.traveldream.persistence.City</class>
+		<class>it.polimi.traveldream.persistence.Excursion</class>
+		<class>it.polimi.traveldream.persistence.Flight</class>
+		<class>it.polimi.traveldream.persistence.Hotel</class>
+		<class>it.polimi.traveldream.persistence.Product</class>
+		<class>it.polimi.traveldream.persistence.DefaultPackage</class>
+		<class>it.polimi.traveldream.persistence.Purchase</class>
+		<class>it.polimi.traveldream.persistence.PersPackage</class>
+		<class>it.polimi.traveldream.persistence.GiftList</class>
+		<class>it.polimi.traveldream.persistence.GiftListPK</class>
+	</persistence-unit>
+</persistence>

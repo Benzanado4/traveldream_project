@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>ModificaDati</title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+		<ui:define name="content">
+		
+		<div id="page_content">
+					<h:form id="modificaDatiForm">
+						
+							<h:panelGrid columns="2" id="regGrid">
+								<h:outputLabel for="email">Email:</h:outputLabel>
+								<p:inputText id="email" value="#{userBean.loggedUser.email}"
+									required="true"
+									requiredMessage="Email: #{navigationBean.mandatory_field}" />
+								
+
+
+
+								<h:outputLabel for="nome">Nome:</h:outputLabel>
+								<p:inputText id="nome" value="#{userBean.loggedUser.name}"
+									required="true"
+									requiredMessage="Nome: #{navigationBean.mandatory_field}" />
+
+								<h:outputLabel for="cognome">Cognome:</h:outputLabel>
+								<p:inputText id="cognome" value="#{userBean.loggedUser.surname}"
+									required="true"
+									requiredMessage="Cognome: #{navigationBean.mandatory_field}" />
+
+								<h:outputLabel for="indirizzo">Indirizzo:</h:outputLabel>
+								<p:inputText id="indirizzo"
+									value="#{userBean.loggedUser.address}" required="true"
+									requiredMessage="Indirizzo: #{navigationBean.mandatory_field}" />
+
+								<h:outputLabel for="telefono">Telefono:</h:outputLabel>
+								<p:inputText id="telefono"
+									value="#{userBean.loggedUser.phoneNumber}" required="true"
+									requiredMessage="Telefono: #{navigationBean.mandatory_field}" />
+
+								<h:outputLabel for="password">Password:</h:outputLabel>
+								<p:password id="password"
+									value="#{userBean.loggedUser.password}" feedback="true"
+									match="pwd2" label="Password" 
+									required="true"
+									requiredMessage="Password: #{navigationBean.mandatory_field}" />
+
+								<h:outputLabel for="pwd2">Conferma Password:</h:outputLabel>
+								<p:password id="pwd2" label="Confirm Password"
+									value="#{userBean.loggedUser.password}" 
+									required="true"
+									requiredMessage="Conferma Password: #{navigationBean.mandatory_field}" />
+									
+							</h:panelGrid>
+							<p:commandButton value="Modifica i dati" update="regGrid"
+								action="#{userBean.updateUserData()}" />
+
+
+					
+
+					</h:form>
+					<p:messages id="messages" showDetail="false" autoUpdate="true"
+						closable="true" />
+			
+			</div>
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

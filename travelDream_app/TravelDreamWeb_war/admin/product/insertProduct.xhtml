@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+
+		<ui:define name="content">
+
+
+			<!-- per il volo -->
+			<h:form id="insertProductFormFlight"
+				rendered="#{param['choose'] == productBean.FLIGHT}">
+
+				<h:panelGrid id="flightGrid" columns="2" cellpadding="8">
+					<h:outputText for="name" value="Nome: " />
+					<p:inputText id="name" value="#{productBean.flight.name}"
+						required="true"
+						requiredMessage="Nome: #{navigationBean.mandatory_field}" />
+
+
+
+					<h:outputText value="Descrizione: " />
+					<p:inputTextarea rows="10" cols="50"
+						value="#{productBean.flight.description}" required="true"
+						requiredMessage="Descrizione: #{navigationBean.mandatory_field}" />
+
+					<h:outputText value="Prezzo: " />
+					<p:inputMask id="Prezzo_Volo" value="#{productBean.flight.price}"
+						required="true"
+						requiredMessage="Prezzo: #{navigationBean.mandatory_field}">
+						<f:validateDoubleRange minimum="0.01" maximum="1000000.00">
+						</f:validateDoubleRange>
+					</p:inputMask>
+
+
+					<h:outputText value="Data: " />
+					<p:calendar value="#{productBean.flight.date}" 
+						required="true"
+						requiredMessage="data: #{navigationBean.mandatory_field}" pattern="dd/MM/yyyy HH:mm">
+						
+					</p:calendar>
+
+
+					<h:outputText value="Città di partenza: " />
+					<h:selectOneMenu value="#{productBean.flight.city1Name}"
+						required="true"
+						requiredMessage="Citta' di partenza: #{navigationBean.mandatory_field}">
+						<f:selectItems value="#{productBean.getCities()}" />
+					</h:selectOneMenu>
+
+
+					<h:outputText value="Città di arrivo: " />
+					<h:selectOneMenu value="#{productBean.flight.city2Name}"
+						required="true"
+						requiredMessage="Citta' di arrivo: #{navigationBean.mandatory_field}">
+						<f:selectItems value="#{productBean.getCities()}" />
+					</h:selectOneMenu>
+				</h:panelGrid>
+
+				<p:commandButton value="Reset" type="reset" />
+				<p:commandButton value="Conferma" update="flightGrid"
+					action="#{productBean.addNewFlight()}" />
+
+				<br />
+
+			</h:form>
+
+
+			<!-- per l'hotel -->
+			<h:form id="insertProductFormHotel"
+				rendered="#{param['choose'] == productBean.HOTEL}">
+
+				<h:panelGrid columns="2" cellpadding="8" id="hotelGrid">
+					<h:outputText value="Nome: " />
+					<p:inputMask value="#{productBean.hotel.name}" required="true"
+						requiredMessage="Nome: #{navigationBean.mandatory_field}" />
+
+
+					<h:outputText value="Descrizione: " />
+					<p:inputTextarea rows="10" cols="50"
+						value="#{productBean.hotel.description}" required="true"
+						requiredMessage="Descrizione: #{navigationBean.mandatory_field}" />
+
+
+					<h:outputText value="Prezzo/Giorno: " />
+					<p:inputMask id="Prezzo_Hotel" value="#{productBean.hotel.price}"
+						required="true"
+						requiredMessage="Prezzo: #{navigationBean.mandatory_field}">
+						<f:validateDoubleRange minimum="0.01" maximum="1000000.00">
+						</f:validateDoubleRange>
+					</p:inputMask>
+
+
+
+					<h:outputText value="Luogo: " />
+					<h:selectOneMenu value="#{productBean.hotel.cityName}"
+						required="true"
+						requiredMessage="Citta': #{navigationBean.mandatory_field}">
+						<f:selectItems value="#{productBean.getCities()}" />
+					</h:selectOneMenu>
+
+
+				</h:panelGrid>
+
+				<p:commandButton value="Reset" type="reset" />
+				<p:commandButton value="Conferma" update="hotelGrid"
+					action="#{productBean.addNewHotel()}" />
+
+
+				<br />
+
+			</h:form>
+
+
+			<!-- per l'escursione -->
+			<h:form id="insertProductFormExcursion"
+				rendered="#{param['choose'] == productBean.EXCURSION}">
+
+				<h:panelGrid columns="2" cellpadding="8" id="excursionGrid">
+
+					<h:outputText value="Nome: " />
+					<p:inputMask value="#{productBean.excursion.name}" required="true"
+						requiredMessage="Nome: #{navigationBean.mandatory_field}" />
+
+
+					<h:outputText value="Descrizione: " />
+					<p:inputTextarea rows="10" cols="50"
+						value="#{productBean.excursion.description}" required="true"
+						requiredMessage="Descrizione: #{navigationBean.mandatory_field}" />
+
+
+					<h:outputText value="Prezzo: " />
+					<p:inputMask id="Prezzo_Escursione"
+						value="#{productBean.excursion.price}" required="true"
+						requiredMessage="Prezzo: #{navigationBean.mandatory_field}">
+
+						<f:validateDoubleRange minimum="0.01" maximum="1000000.00">
+						</f:validateDoubleRange>
+					</p:inputMask>
+
+
+
+					<h:outputText value="Data: " />
+					<p:calendar value="#{productBean.excursion.date}"
+						required="true"
+						requiredMessage="Data: #{navigationBean.mandatory_field}" pattern="dd/MM/yyyy HH:mm">
+						
+					</p:calendar>
+
+
+					<h:outputText value="Luogo: " />
+					<h:selectOneMenu value="#{productBean.excursion.cityName}"
+						required="true"
+						requiredMessage="Luogo: #{navigationBean.mandatory_field}">
+						<f:selectItems value="#{productBean.getCities()}" />
+					</h:selectOneMenu>
+				</h:panelGrid>
+
+				<p:commandButton value="Reset" type="reset" />
+				<p:commandButton value="Conferma" update="excursionGrid"
+					action="#{productBean.addNewExcursion()}" />
+
+				<br />
+
+
+			</h:form>
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

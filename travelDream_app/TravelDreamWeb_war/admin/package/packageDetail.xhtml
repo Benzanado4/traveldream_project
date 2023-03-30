@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+
+		<ui:define name="content">
+
+			<div id="page_content">
+
+				<h:form id="updateDefaultPackageForm">
+
+					<p:wizard flowListener="#{packageBean.onFlowProcess}">
+
+						<p:tab id="newPackageDetail" title="Dettagli">
+
+							<h:message errorClass="error" />
+
+							<h:panelGrid columns="2" columnClasses="label, value"
+								styleClass="grid">
+
+								<h:outputText value="Nome: *" />
+								<p:inputText required="true" label="Nome"
+									value="#{packageBean.defaultPackageDTO.name}"
+									requiredMessage="Nome: #{navigationBean.mandatory_field}">
+								</p:inputText>
+
+
+								<h:outputText value="Descrizione: *" />
+								<p:inputTextarea required="true" label="Descrizione" rows="10"
+									cols="50"
+									requiredMessage="Descrizione: #{navigationBean.mandatory_field}"
+									value="#{packageBean.defaultPackageDTO.description}" />
+
+							</h:panelGrid>
+
+
+						</p:tab>
+
+
+						<!-- FLIGHT TAB  -->
+						<p:tab id="newPackageFlights" title="Voli">
+
+							<h:message errorClass="error" />
+
+							<p:dataTable id="newPackageFlightsTable" var="flight"
+								value="#{packageBean.flightDTODataModel}"
+								selection="#{packageBean.packageFlights}">
+
+
+								<p:column selectionMode="multiple" style="width:2%" />
+
+								<p:column headerText="Nome" style="width:15%">
+									<h:outputText value="#{flight.name}" />
+								</p:column>
+
+								<p:column headerText="Descrizione" style="width:35%">
+									<h:outputText value="#{flight.description}" />
+								</p:column>
+
+
+								<p:column headerText="Citta di Partenza" style="width:10%">
+									<h:outputText value="#{flight.city1Name}" />
+								</p:column>
+
+								<p:column headerText="Citta di Arrivo" style="width:10%">
+									<h:outputText value="#{flight.city2Name}" />
+								</p:column>
+
+								<p:column headerText="Data" style="width:10%">
+									<h:outputText value="#{flight.date}" />
+								</p:column>
+
+								<p:column headerText="Prezzo" style="width:10%">
+									<h:outputText value="#{flight.price}" />
+								</p:column>
+
+							</p:dataTable>
+
+						</p:tab>
+
+						<!-- HOTEL TAB  -->
+						<p:tab id="newPackageHotels" title="Hotel">
+
+							<h:message errorClass="error" />
+
+							<p:dataTable id="newPackagHotelsTable" var="hotel"
+								value="#{packageBean.hotelDTODataModel}"
+								selection="#{packageBean.packageHotels}">
+
+								<p:column selectionMode="multiple" style="width:2%" />
+
+								<p:column headerText="Nome" style="width:15%">
+									<h:outputText value="#{hotel.name}" />
+								</p:column>
+
+								<p:column headerText="Descrizione" style="width:35%">
+									<h:outputText value="#{hotel.description}" />
+								</p:column>
+
+								<p:column headerText="Citta" style="width:10%">
+									<h:outputText value="#{hotel.cityName}" />
+								</p:column>
+
+								<p:column headerText="Prezzo" style="width:10%">
+									<h:outputText value="#{hotel.price}" />
+								</p:column>
+
+							</p:dataTable>
+
+						</p:tab>
+
+						<!-- EXCURSION TAB  -->
+						<p:tab id="newPackageExcursions" title="Escursioni">
+
+							<h:message errorClass="error" />
+
+							<p:dataTable id="newPackageExcursionTable" var="excursion"
+								value="#{packageBean.excursionDTODataModel}"
+								selection="#{packageBean.packageExcursion}">
+
+
+								<p:column selectionMode="multiple" style="width:2%" />
+
+								<p:column headerText="Nome" style="width:15%">
+									<h:outputText value="#{excursion.name}" />
+								</p:column>
+
+								<p:column headerText="Descrizione" style="width:35%">
+									<h:outputText value="#{excursion.description}" />
+								</p:column>
+
+								<p:column headerText="Citta" style="width:10%">
+									<h:outputText value="#{excursion.cityName}" />
+								</p:column>
+
+								<p:column headerText="Data" style="width:10%">
+									<h:outputText value="#{excursion.date}" />
+								</p:column>
+
+								<p:column headerText="Prezzo" style="width:10%">
+									<h:outputText value="#{excursion.price}" />
+								</p:column>
+
+							</p:dataTable>
+
+						</p:tab>
+
+						<p:tab id="newPackageImage" title="Immagine">
+
+
+							<p:selectOneListbox id="scroll"
+								value="#{packageBean.defaultPackageDTO.imageId}" var="imageId"
+								style="height:400px; width:450px;">
+								<f:selectItems value="#{imagesBean.imageIds}" />
+
+								<p:column>
+									<p:graphicImage
+										value="/resources/images/packages/#{imageId}.jpg" width="400" />
+								</p:column>
+
+
+							</p:selectOneListbox>
+						</p:tab>
+
+
+						<p:tab id="newPackageConfirm" title="Conferma">
+
+							<h:panelGrid id="confirm" columns="2">
+
+								<h:outputText value="Nome: " />
+								<h:outputText styleClass="outputLabel"
+									value="#{packageBean.defaultPackageDTO.name}" />
+
+								<h:outputText value="Descrizione: " />
+								<h:outputText styleClass="outputLabel"
+									value="#{packageBean.defaultPackageDTO.description}" />
+
+							</h:panelGrid>
+
+							<br />
+
+							<p:graphicImage
+								value="/resources/images/packages/#{packageBean.defaultPackageDTO.imageId}.jpg"
+								style="width: 400px;"></p:graphicImage>
+
+
+							<h:outputText value="Voli: " />
+
+							<p:dataTable id="newPackageFlightsTableSummary" var="flight"
+								value="#{packageBean.packageFlights}">
+
+
+								<p:column headerText="Nome" style="width:15%">
+									<h:outputText value="#{flight.name}" />
+								</p:column>
+
+								<p:column headerText="Descrizione" style="width:35%">
+									<h:outputText value="#{flight.description}" />
+								</p:column>
+
+
+								<p:column headerText="Citta di Partenza" style="width:10%">
+									<h:outputText value="#{flight.city1Name}" />
+								</p:column>
+
+								<p:column headerText="Citta di Arrivo" style="width:10%">
+									<h:outputText value="#{flight.city2Name}" />
+								</p:column>
+
+								<p:column headerText="Data" style="width:10%">
+									<h:outputText value="#{flight.date}" />
+								</p:column>
+
+								<p:column headerText="Prezzo" style="width:10%">
+									<h:outputText value="#{flight.price}" />
+								</p:column>
+
+							</p:dataTable>
+
+							<br />
+
+							<h:outputText value="Hotel: " />
+
+							<p:dataTable id="newPackagHotelsTableSummary" var="hotel"
+								value="#{packageBean.packageHotels}">
+
+								<p:column headerText="Nome" style="width:15%">
+									<h:outputText value="#{hotel.name}" />
+								</p:column>
+
+								<p:column headerText="Descrizione" style="width:35%">
+									<h:outputText value="#{hotel.description}" />
+								</p:column>
+
+								<p:column headerText="Citta" style="width:10%">
+									<h:outputText value="#{hotel.cityName}" />
+								</p:column>
+
+								<p:column headerText="Prezzo" style="width:10%">
+									<h:outputText value="#{hotel.price}" />
+								</p:column>
+
+							</p:dataTable>
+
+							<br />
+
+							<h:outputText value="Escursioni: " />
+
+							<p:dataTable id="newPackageExcursionTableSummary" var="excursion"
+								value="#{packageBean.packageExcursion}">
+
+
+								<p:column headerText="Nome" style="width:15%">
+									<h:outputText value="#{excursion.name}" />
+								</p:column>
+
+								<p:column headerText="Descrizione" style="width:35%">
+									<h:outputText value="#{excursion.description}" />
+								</p:column>
+
+								<p:column headerText="Citta" style="width:10%">
+									<h:outputText value="#{excursion.cityName}" />
+								</p:column>
+
+								<p:column headerText="Data" style="width:10%">
+									<h:outputText value="#{excursion.date}" />
+								</p:column>
+
+								<p:column headerText="Prezzo" style="width:10%">
+									<h:outputText value="#{excursion.price}" />
+								</p:column>
+
+							</p:dataTable>
+
+							<br />
+
+
+							<h:outputText value="Prezzo Totale: " />
+							<h:outputText styleClass="outputLabel"
+								value="#{packageBean.calculatePrice()}" />
+
+
+
+							<p:commandButton value="Conferma"
+								action="#{packageBean.updateDefaultPackage()}" />
+
+						</p:tab>
+
+					</p:wizard>
+
+
+
+				</h:form>
+
+
+				<p:messages id="messages" showDetail="false" autoUpdate="true"
+					closable="true" />
+
+			</div>
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

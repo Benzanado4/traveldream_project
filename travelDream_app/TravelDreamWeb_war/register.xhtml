@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>Register</title>
+</h:head>
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+		<ui:define name="content">
+<div id="page_content">
+			<h:form id="registerForm">
+				
+					<h:panelGrid columns="2" id="regGrid">
+						<h:outputText value="Email:" />
+						<p:inputText id="email" value="#{registerBean.user.email}"
+							required="true"
+							requiredMessage="Email: #{navigationBean.mandatory_field}" />
+
+						<h:outputLabel for="nome">Nome:</h:outputLabel>
+						<p:inputText id="nome" value="#{registerBean.user.name}"
+							required="true"
+							requiredMessage="Nome: #{navigationBean.mandatory_field}" />
+						
+
+						<h:outputLabel for="cognome">Cognome:</h:outputLabel>
+						<p:inputText id="cognome" value="#{registerBean.user.surname}"
+							required="true"
+							requiredMessage="Cognome: #{navigationBean.mandatory_field}" />
+
+						<h:outputLabel for="indirizzo">Indirizzo:</h:outputLabel>
+						<p:inputText id="indirizzo" value="#{registerBean.user.address}"
+							required="true"
+							requiredMessage="Indirizzo: #{navigationBean.mandatory_field}" />
+
+						<h:outputLabel for="telefono">Telefono:</h:outputLabel>
+						<p:inputText id="telefono"
+							value="#{registerBean.user.phoneNumber}" required="true"
+							requiredMessage="Telefono: #{navigationBean.mandatory_field}" />
+
+						<h:outputLabel for="username">Username:</h:outputLabel>
+						<p:inputText id="username" value="#{registerBean.user.username}"
+							required="true"
+							requiredMessage="Username: #{navigationBean.mandatory_field}" />
+
+						<h:outputLabel for="password">Password:</h:outputLabel>
+						<p:password id="password" value="#{registerBean.user.password}"
+							feedback="true" match="pwd2" label="Password" required="true"
+							requiredMessage="Passord: #{navigationBean.mandatory_field}" />
+
+						<h:outputLabel for="pwd2">Confirm Password:</h:outputLabel>
+						<p:password id="pwd2" label="Confirm Password"
+							value="#{registerBean.user.password}" required="true"
+							requiredMessage="Conferma Password: #{navigationBean.mandatory_field}" />
+							
+					</h:panelGrid>
+					<p:commandButton value="Register" update="regGrid"
+						action="#{registerBean.register()}" />
+
+
+			
+			</h:form>
+			
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+				
+				</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

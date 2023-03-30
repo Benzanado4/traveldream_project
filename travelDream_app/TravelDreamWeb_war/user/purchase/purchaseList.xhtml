@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+
+		<ui:define name="content">
+			<div id="page_content">
+
+				<h:outputText value="I tuoi acquisti"
+					styleClass="defaultPageContent"></h:outputText>
+				<HR styleClass="separator" />
+
+
+
+
+				<p:dataTable id="purchaseTable" var="purchase"
+					value="#{purchaseBean.getAll()}">
+
+					<p:column headerText="Data Acquisto" style="width:25%">
+						<h:outputText value="#{purchase.purchaseDate}">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Nome Pacchetto" style="width:35%">
+						<h:outputText
+							value="#{purchaseBean.getPersPackageNameByPurchaseId(purchase.persPackageId)}" />
+					</p:column>
+
+					<p:column headerText="Prezzo Pacchetto" style="width:10%">
+						<h:outputText
+							value="#{purchaseBean.calculatePersPackagePriceByPurchaseId(purchase.persPackageId)}" />
+						<h:outputText value=" €" />
+					</p:column>
+
+					<p:column headerText="Vai al Pacchetto" style="width:5%">
+						<p:button icon="ui-icon-triangle-1-e"
+							outcome="#{navigationBean.toPersPackageDetail(purchase.persPackageId)}" />
+					</p:column>
+
+				</p:dataTable>
+
+
+
+				<p:button value="Torna alla lista di pacchetti"
+					style="margin-top:10px;"
+					outcome="/user/persPackage/persPackageList?faces-redirect=true" />
+				<br />
+			</div>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

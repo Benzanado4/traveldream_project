@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:body>
+
+	<ui:composition template="/template/common/templateLayout.xhtml">
+
+		<ui:define name="content">
+
+<div id="page_content">
+			<h:form>
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5"
+					columnClasses="label, column">
+
+					<h:outputText value="Seleziona il tipo di prodotto" />
+					<p:selectOneMenu id="prova"
+						value="#{navigationBean.newProductChoose}" required="true"
+						requiredMessage="Seleziona un tipo di Prodotto">
+						<f:selectItem itemLabel="Tipo di Prodotto" itemValue=""
+							noSelectionOption="true" />
+						<f:selectItem itemLabel="Volo" itemValue="#{productBean.FLIGHT}" />
+						<f:selectItem itemLabel="Hotel" itemValue="#{productBean.HOTEL}" />
+						<f:selectItem itemLabel="Escursione"
+							itemValue="#{productBean.EXCURSION}" />
+					</p:selectOneMenu>
+
+				</h:panelGrid>
+				<p:commandButton id="submitButton" value="Conferma"
+					action="#{navigationBean.toNewProductFilter()}">
+				</p:commandButton>
+			</h:form>
+			<p:messages id="messages" showDetail="false" autoUpdate="true"
+				closable="true" />
+				
+				</div>
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>

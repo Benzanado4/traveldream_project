@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+<h:body>
+	<ui:composition template="/template/common/templateLayout.xhtml">
+		<ui:define name="content">
+			<div id="page_content">
+				<div id="giftList">
+					<h:form>
+
+						<h:outputText styleClass="defaultPageContent"
+							value="Gift List del Pacchetto" />
+
+						<p:dataTable id="giftList" var="product"
+							value="#{giftListBean.productsInGiftList}">
+
+
+
+
+							<p:column headerText="Nome" style="width:15%">
+								<h:outputText value="#{product.name}" />
+							</p:column>
+
+							<p:column headerText="Descrizione" style="width:35%">
+								<h:outputText value="#{product.description}" />
+							</p:column>
+
+							<p:column headerText="Prezzo" style="width:10%">
+								<h:outputText value="#{product.price}" />
+								<h:outputText value=" €" />
+							</p:column>
+
+
+
+
+							<p:column headerText="Paga" style="width:10%">
+								<p:commandButton value="Paga" icon="ui-icon-cart"
+									action="#{giftListBean.purchaseProductGiftList(product.productId)}"
+									rendered="#{!giftListBean.isProductPurchased(product.productId)}">
+									<p:confirm header="Conferma" message="Vuoi pagare il prodoto?"
+										icon="ui-icon-alert"></p:confirm>
+								</p:commandButton>
+
+
+
+								<p:confirmDialog global="true" showEffect="fade"
+									hideEffect="fade">
+									<p:commandButton value="Acquista" type="button"
+										styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+									<p:commandButton value="Annulla" type="button"
+										styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+								</p:confirmDialog>
+							</p:column>
+
+
+
+						</p:dataTable>
+
+
+
+
+
+					</h:form>
+				</div>
+
+			</div>
+		</ui:define>
+	</ui:composition>
+
+</h:body>
+</html>

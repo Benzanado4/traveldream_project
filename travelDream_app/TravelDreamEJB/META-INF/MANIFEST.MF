@@ -1,0 +1,3 @@
+#for Java archive file (containing compiled Java classes and resources) for subversion svn   
+Manifest-Version: 1.0
+Class-Path: TravelDreamEJBClient.jar

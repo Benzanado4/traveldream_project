@@ -1,2 +1,4 @@
 # traveldream_project
-Java EE web application designed for a project of Software Engineering 2 course at Politecnico of Milan 
+A Java EE web application for a fictional travel acency. 
+Project of Software Engineering 2 course at Politecnico of Milan, originally hosted on Subversion.
+Check docs/Manuale\ d_uso.pdf and docs/Guida\ all_installazione.pdf for further info.
